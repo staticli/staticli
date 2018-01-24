@@ -8,4 +8,4 @@ This application provides a way of running rake preview against a Jekyll site
 
 
 [ ![Download](https://api.bintray.com/packages/wheresalice/staticli/staticli/images/download.svg) ](https://bintray.com/wheresalice/staticli/staticli/_latestVersion)
-[![Build Status](https://travis-ci.org/wheresalice/staticli.svg?branch=master)](https://travis-ci.org/wheresalice/staticli)
+[![Build Status](https://travis-ci.org/WheresAlice/staticli.svg?branch=master)](https://travis-ci.org/WheresAlice/staticli)
