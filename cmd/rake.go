@@ -1,6 +1,8 @@
 package cmd
 
 import "github.com/skybet/cali"
+import "github.com/docker/go-connections/nat"
+import _ "github.com/pkg/errors"
 
 func init() {
 
@@ -13,10 +15,17 @@ Examples:
   Any addtional flags sent to the rake command come after the --, e.g.
   # staticli rake preview -- --future
 `)
+	command.Flags().StringP("port", "p", "4000", "Port to expose on host")
 	command.BindFlags()
 
 	task := command.Task("kaerast/rake-preview")
-	task.HostConf.PublishAllPorts = true
-	// @todo the above publishes ports defined in the Dockerfile as `EXPOSE` on a random port.  We would prefer a defined port, however we don't understand enough Go to use task.HostConf.PortBindings
-	task.SetInitFunc(func(t *cali.Task, args []string) {})
+	task.SetInitFunc(func(t *cali.Task, args []string) {
+
+		task.HostConf.PortBindings = nat.PortMap{
+			nat.Port("4000/tcp"): []nat.PortBinding{
+				{HostIP: "0.0.0.0", HostPort: cli.FlagValues().GetString("port")},
+			},
+		}
+
+	})
 }
