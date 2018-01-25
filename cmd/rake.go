@@ -2,7 +2,10 @@ package cmd
 
 import "github.com/skybet/cali"
 import "github.com/docker/go-connections/nat"
-import _ "github.com/pkg/errors"
+import "os/user"
+import log "github.com/Sirupsen/logrus"
+import (
+	_ "github.com/pkg/errors")
 
 func init() {
 
@@ -18,7 +21,13 @@ Examples:
 	command.Flags().StringP("port", "p", "4000", "Port to expose on host")
 	command.BindFlags()
 
-	task := command.Task("kaerast/rake-preview")
+	task := command.Task("staticli/rake")
+	u, err := user.Current()
+	if err != nil {
+		log.Fatalf("Failed to find uid for user: %s", err)
+	}
+	task.AddEnv("HOST_USER_ID", u.Uid)
+	task.AddEnv("HOST_GROUP_ID", u.Gid)
 	task.SetInitFunc(func(t *cali.Task, args []string) {
 
 		task.HostConf.PortBindings = nat.PortMap{
