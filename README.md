@@ -14,4 +14,8 @@ This application will provide a number of static site generator applications ove
 
 `staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
+`staticli gulp` runs the gulp watch task
+
+`staticli gulp -t foo` runs the gulp foo task
+
 [ ![Download](https://api.bintray.com/packages/wheresalice/staticli/staticli/images/download.svg) ](https://bintray.com/wheresalice/staticli/staticli/_latestVersion)
