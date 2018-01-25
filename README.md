@@ -8,10 +8,9 @@ This application will provide a number of static site generator applications ove
 
 ## Usage
 
-`staticli rake` - runs `bundle && bundle exec rake preview` for the Jekyll site in the current directory, within a docker image.
+`staticli rake` - runs `bundle && bundle exec rake preview` for the Jekyll site in the current directory, within a docker image.  You can now open a browser to http://127.0.0.1:4000.
 
-It serves the port on a random number because we haven't figured how to make that static yet.  You'll need to run `docker ps` in order to find out what port is being used.
-
+`staticli rake -p 2000` runs it on port 2000 instead of the default port of 4000
 
 [ ![Download](https://api.bintray.com/packages/wheresalice/staticli/staticli/images/download.svg) ](https://bintray.com/wheresalice/staticli/staticli/_latestVersion)
 [![Build Status](https://travis-ci.org/WheresAlice/staticli.svg?branch=master)](https://travis-ci.org/WheresAlice/staticli)
