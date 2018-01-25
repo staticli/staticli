@@ -15,4 +15,3 @@ This application will provide a number of static site generator applications ove
 `staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
 [ ![Download](https://api.bintray.com/packages/wheresalice/staticli/staticli/images/download.svg) ](https://bintray.com/wheresalice/staticli/staticli/_latestVersion)
-[![Build Status](https://travis-ci.org/WheresAlice/staticli.svg?branch=master)](https://travis-ci.org/WheresAlice/staticli)
