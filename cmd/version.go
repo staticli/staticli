@@ -4,7 +4,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/skybet/cali"
 
-	"github.com/wheresalice/staticli/lib"
+	"github.com/staticli/staticli/lib"
 )
 
 func init() {

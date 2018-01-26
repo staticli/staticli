@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/wheresalice/staticli/cmd"
+	"github.com/staticli/staticli/cmd"
 )
 
 func main() {
