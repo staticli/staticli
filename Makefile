@@ -19,9 +19,9 @@ ifeq ($(UNAME_S),Linux)
 endif
 
 # Setup the -ldflags option for go build here, interpolate the variable values
-LDFLAGS=-ldflags \"-X github.com/wheresalice/staticli/lib.Version=${VERSION} -X github.com/wheresalice/staticli/lib.BuildTime=${BUILD_TIME} -X github.com/wheresalice/staticli/lib.BuildCommit=${BUILD_COMMIT} -X github.com/wheresalice/staticli/lib.BuildRepo=${BUILD_REPO}\"
+LDFLAGS=-ldflags \"-X github.com/staticli/staticli/lib.Version=${VERSION} -X github.com/staticli/staticli/lib.BuildTime=${BUILD_TIME} -X github.com/staticli/staticli/lib.BuildCommit=${BUILD_COMMIT} -X github.com/staticli/staticli/lib.BuildRepo=${BUILD_REPO}\"
 
-DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/../../../:/go/src/ -w /go/src/github.com/wheresalice/staticli
+DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/../../../:/go/src/ -w /go/src/github.com/staticli/staticli
 
 .DEFAULT_GOAL: $(BINARY)
 $(BINARY): $(BINARY).darwin.amd64 $(BINARY).linux.amd64 $(BINARY).linux.arm
