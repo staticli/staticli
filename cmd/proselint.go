@@ -8,9 +8,9 @@ func init() {
 
 	command := cli.NewCommand("proselint [command]")
 	command.SetShort("Run proselint")
-	command.SetLong(`Starts a container and runs rake proselint.
+	command.SetLong(`Starts a container and runs proselint.
 Examples:
-  To render the site locally.
+  To run against a local file.
   # staticli proselint foo.md
 `)
 
