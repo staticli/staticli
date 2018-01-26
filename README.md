@@ -4,18 +4,21 @@ A CLI tool for working with static site generators.
 
 A [Cali](https://github.com/skybet/cali) App
 
-This application will provide a number of static site generator applications over the course of time.
+This application provides a number of tools related to static site generation, all running in docker containers from a single binary file.  Rather than go through the hassle of installing Ruby, rake, bundler, jekyll, python, proselint, gulp, etc. you only need the one single binary file and to have docker installed.
+
+## Installation
+
+1. Install Docker (`brew cask install docker` on MacOS)
+2. Download the [correct binary](https://bintray.com/wheresalice/staticli/staticli/_latestVersion), move it into your $PATH as `staticli` and make it executable
 
 ## Usage
 
-`staticli rake` - runs `bundle install --path=_vendor && bundle exec rake $@` in the current directory, within a docker image.  Assuming this is a Jekyll site with a default rake task of previewing the site, you can now open a browser and view the site at http://127.0.0.1:4000
+From this one single binary you can now run rake tasks to preview and validate Jekyll blogs, run proselint to check for best practises in writing, and run gulp to turn sass into css.  All of this happens inside docker containers, so you don't actually need to install any extra tooling.  You will need an internet connection the first time you run each subcommand in order to download the container though.
 
-`staticli rake -p 2000` runs it on port 2000 instead of the default port of 4000
+`staticli rake` - runs `bundle install --path=_vendor && bundle exec rake $@` in the current directory.  Assuming this is a Jekyll site with a default rake task of previewing the site, you can now open a browser and view the site at http://127.0.0.1:4000.  If you're already using port 4000 you can add `-p 2000` to change to port 2000 (or any port)
 
 `staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
-`staticli gulp` runs the gulp watch task
-
-`staticli gulp -t foo` runs the gulp foo task
+`staticli gulp` runs the gulp watch task.  You can add `-t foo` to run the foo task instead.
 
 [ ![Download](https://api.bintray.com/packages/wheresalice/staticli/staticli/images/download.svg) ](https://bintray.com/wheresalice/staticli/staticli/_latestVersion)
