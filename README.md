@@ -21,4 +21,4 @@ From this one single binary you can now run rake tasks to preview and validate J
 
 `staticli gulp` runs the gulp watch task.  You can add `-t foo` to run the foo task instead.
 
-[ ![Download](https://api.bintray.com/packages/staticli/staticli/staticli/images/download.svg) ](https://bintray.com/wheresalice/staticli/staticli/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/staticli/staticli/staticli/images/download.svg) ](https://bintray.com/staticli/staticli/staticli/_latestVersion)
