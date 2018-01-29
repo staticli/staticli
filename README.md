@@ -9,7 +9,7 @@ This application provides a number of tools related to static site generation, a
 ## Installation
 
 1. Install Docker (`brew cask install docker` on MacOS)
-2. Download the [correct binary](https://bintray.com/wheresalice/staticli/staticli/_latestVersion), move it into your $PATH as `staticli` and make it executable
+2. Download the [correct binary](https://bintray.com/staticli/staticli/staticli/_latestVersion), move it into your $PATH as `staticli` and make it executable
 
 ## Usage
 
