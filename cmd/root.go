@@ -12,6 +12,8 @@ var (
 func init() {
 	cli.SetShort("Static site generator tooling")
 	cli.SetLong("Static site generator tooling")
+	cli.Flags().StringP("port", "p", "2000", "Which port should we expose on the host?")
+	cli.BindFlags()
 }
 
 func Execute() {

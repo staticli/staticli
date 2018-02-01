@@ -18,9 +18,6 @@ Examples:
   You can also set the port to listen on if you want something other than port 8000.
   # staticli simplehttp -p 3000
 `)
-	command.Flags().StringP("port", "p", "8000", "Port to expose on host")
-	command.BindFlags()
-
 	task := command.Task("staticli/simplehttp")
 	u, err := user.Current()
 	if err != nil {

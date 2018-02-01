@@ -18,8 +18,6 @@ Examples:
   Any addtional flags sent to the rake command come after the --, e.g.
   # staticli rake preview -- --future
 `)
-	command.Flags().StringP("port", "p", "4000", "Port to expose on host")
-	command.BindFlags()
 
 	task := command.Task("staticli/rake")
 	u, err := user.Current()

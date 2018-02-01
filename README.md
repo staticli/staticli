@@ -15,7 +15,7 @@ This application provides a number of tools related to static site generation, a
 
 From this one single binary you can now run rake tasks to preview and validate Jekyll blogs, run proselint to check for best practises in writing, and run gulp to turn sass into css.  All of this happens inside docker containers, so you don't actually need to install any extra tooling.  You will need an internet connection the first time you run each subcommand in order to download the container though.
 
-`staticli rake` - runs `bundle install --path=_vendor && bundle exec rake $@` in the current directory.  Assuming this is a Jekyll site with a default rake task of previewing the site, you can now open a browser and view the site at http://127.0.0.1:4000.  If you're already using port 4000 you can add `-p 2000` to change to port 2000 (or any port)
+`staticli rake` - runs `bundle install --path=_vendor && bundle exec rake $@` in the current directory.  Assuming this is a Jekyll site with a default rake task of previewing the site, you can now open a browser and view the site at http://127.0.0.1:2000.  If you're already using port 2000 you can add `-p 4000` to change to port 4000 (or any port)
 
 `staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
