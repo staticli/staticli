@@ -24,8 +24,8 @@ Examples:
 		log.Fatalf("Failed to find uid for user: %s", err)
 	}
 
+	// Mount ~/.netrc for authentication
 	netRc := path.Join(u.HomeDir, ".netrc")
-
 	netRcBind, err := task.Bind(netRc, "/root/.netrc")
 	if err != nil {
 		log.Fatalf("Unable to bind ~/.netrc: %s", err)
