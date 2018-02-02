@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - Default port is 2000 for everything that listens
+### Added
+- Bundle command which reuses the rake image
 
 ## [0.7.0] - 2018-02-01
 ### Added
