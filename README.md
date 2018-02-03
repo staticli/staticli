@@ -21,6 +21,8 @@ Staticli provides the tools that its developers regularly use to work with stati
 1. Install Docker (`brew cask install docker` on MacOS)
 2. Download the [correct binary](https://bintray.com/staticli/staticli/staticli/_latestVersion), move it into your $PATH as `staticli` and make it executable
 
+[![asciicast](https://asciinema.org/a/159883.png)](https://asciinema.org/a/159883)
+
 ## Usage
 
 From this one single binary you can now run rake tasks to preview and validate Jekyll blogs, run proselint to check for best practises in writing, and run gulp to turn sass into css.  All of this happens inside docker containers, so you don't actually need to install any extra tooling.  You will need an internet connection the first time you run each subcommand in order to download the container though.
@@ -42,5 +44,7 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli simplehttp` runs Python SimpleHTTP in the current directory.
 
 `staticli surge` runs surge, allowing you to deploy the current directory to a surge.sh site.
+
+[![asciicast](https://asciinema.org/a/159884.png)](https://asciinema.org/a/159884)
 
 [ ![Download](https://api.bintray.com/packages/staticli/staticli/staticli/images/download.svg) ](https://bintray.com/staticli/staticli/staticli/_latestVersion)
