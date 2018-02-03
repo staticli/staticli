@@ -21,7 +21,7 @@ Staticli provides the tools that its developers regularly use to work with stati
 1. Install Docker (`brew cask install docker` on MacOS)
 2. Download the [correct binary](https://bintray.com/staticli/staticli/staticli/_latestVersion), move it into your $PATH as `staticli` and make it executable
 
-[![asciicast](https://asciinema.org/a/159883.png)](https://asciinema.org/a/159883)
+See this [asciicast](https://asciinema.org/a/159883) to watch it being installed
 
 ## Usage
 
@@ -45,6 +45,6 @@ For any command which exposes a port (typically an http server to render a site)
 
 `staticli surge` runs surge, allowing you to deploy the current directory to a surge.sh site.
 
-[![asciicast](https://asciinema.org/a/159884.png)](https://asciinema.org/a/159884)
+See this [asciicast](https://asciinema.org/a/159884) to see proselint being used for the first time.
 
 [ ![Download](https://api.bintray.com/packages/staticli/staticli/staticli/images/download.svg) ](https://bintray.com/staticli/staticli/staticli/_latestVersion)
