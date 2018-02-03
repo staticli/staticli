@@ -27,7 +27,7 @@ Examples:
 	task.AddEnv("HOST_USER_ID", u.Uid)
 	task.AddEnv("HOST_GROUP_ID", u.Gid)
 	task.SetInitFunc(func(t *cali.Task, args []string) {
-
+		log.Infof("Serving http on port %s - http://127.0.0.1:%s", cli.FlagValues().GetString("port"), cli.FlagValues().GetString("port"))
 		task.HostConf.PortBindings = nat.PortMap{
 			nat.Port("4000/tcp"): []nat.PortBinding{
 				{HostIP: "0.0.0.0", HostPort: cli.FlagValues().GetString("port")},
