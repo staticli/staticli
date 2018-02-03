@@ -9,8 +9,9 @@ This application provides a number of tools related to static site generation, a
 Staticli provides the tools that its developers regularly use to work with static websites.  We're open to pull requests for additional tooling, but it must be relevant to static web site development (feel free to create your own Cali app for other tools).  The tools we currently provide include:
 
 * bundle and rake for working with Jekyll and github-pages websites
-* heroku for deploying sites to heroku
 * gulp for compiling scss to css
+* heroku for deploying sites to heroku
+* hugo for providing the hugo static site generator
 * proselint for checking files for best practises in writing
 * python simplehttp for serving the current directory over http
 * surge for deploying sites to surge.sh
@@ -35,6 +36,8 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli gulp` runs the gulp watch task.  You can add `-t foo` to run the foo task instead.
 
 `staticli heroku` runs the Heroku cli, and takes any parameters and subcommands you need (uses ~/.netrc for authentication)
+
+`staticli hugo` runs the hugo static site generator
 
 `staticli simplehttp` runs Python SimpleHTTP in the current directory.
 
