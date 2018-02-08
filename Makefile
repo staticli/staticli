@@ -6,6 +6,7 @@ BUILD_TIME=`date +%FT%T%z`
 
 DEFAULT_SYSTEM_BINARY := $(BINARY).darwin.amd64
 BINTRAY_API_KEY=$(shell cat api_key)
+GITHUB_API_KEY=$(shell cat github_api)
 VERSION=$(shell cat VERSION)
 BUILD_TIME=$(shell date +%FT%T%z)
 BUILD_COMMIT=$(shell git rev-parse HEAD)
@@ -53,10 +54,10 @@ install:
 
 .PHONY: release
 release:
-	curl -T ${BINARY}.darwin.amd64 -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.darwin.amd64
-	curl -T ${BINARY}.linux.amd64  -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.linux.amd64
-	curl -T ${BINARY}.linux.arm    -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.linux.arm
-
+#	curl -T ${BINARY}.darwin.amd64 -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.darwin.amd64
+#	curl -T ${BINARY}.linux.amd64  -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.linux.amd64
+#	curl -T ${BINARY}.linux.arm    -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.linux.arm
+	staticli github-release "${VERSION}" staticli.darwin.amd64 staticli.linux.amd64 staticli.linux.arm -- --github-access-token ${GITHUB_API_KEY} --github-repository staticli/staticli
 
 # Really simple "does it at least run?" tests for now
 # Proper tests coming at some point

@@ -9,6 +9,7 @@ This application provides a number of tools related to static site generation, a
 Staticli provides the tools that its developers regularly use to work with static websites.  We're open to pull requests for additional tooling, but it must be relevant to static web site development (feel free to create your own Cali app for other tools).  The tools we currently provide include:
 
 * bundle and rake for working with Jekyll and github-pages websites
+* github-release for releasing a new version of something to github
 * gulp for compiling scss to css
 * heroku for deploying sites to heroku
 * hugo for providing the hugo static site generator
@@ -44,6 +45,8 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli simplehttp` runs Python SimpleHTTP in the current directory.
 
 `staticli surge` runs surge, allowing you to deploy the current directory to a surge.sh site.
+
+`staticli github-release` for releasing something to github (see the Makefile for how this is used, it's probably not that helpful except for releasing new versions of staticli)
 
 See this [asciicast](https://asciinema.org/a/159884) to see proselint being used for the first time.
 
