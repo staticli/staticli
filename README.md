@@ -20,7 +20,7 @@ Staticli provides the tools that its developers regularly use to work with stati
 ## Installation
 
 1. Install Docker (`brew cask install docker` on MacOS)
-2. Download the [correct binary](https://bintray.com/staticli/staticli/staticli/_latestVersion), move it into your $PATH as `staticli` and make it executable
+2. Download the [correct binary](https://github.com/staticli/staticli/releases/latest), move it into your $PATH as `staticli` and make it executable
 
 See this [asciicast](https://asciinema.org/a/159883) to watch it being installed
 
@@ -50,4 +50,4 @@ For any command which exposes a port (typically an http server to render a site)
 
 See this [asciicast](https://asciinema.org/a/159884) to see proselint being used for the first time.
 
-[ ![Download](https://api.bintray.com/packages/staticli/staticli/staticli/images/download.svg) ](https://bintray.com/staticli/staticli/staticli/_latestVersion)
+[![Download](http://github-release-version.herokuapp.com/github/staticli/staticli/release.svg?style=flat)](https://github.com/staticli/staticli/releases/latest)

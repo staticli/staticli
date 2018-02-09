@@ -54,9 +54,6 @@ install:
 
 .PHONY: release
 release:
-#	curl -T ${BINARY}.darwin.amd64 -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.darwin.amd64
-#	curl -T ${BINARY}.linux.amd64  -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.linux.amd64
-#	curl -T ${BINARY}.linux.arm    -uwheresalice:${BINTRAY_API_KEY} https://api.bintray.com/content/staticli/${BINARY}/${BINARY}/${VERSION}/${BINARY}-${VERSION}.linux.arm
 	git push && staticli github-release "${VERSION}" staticli.darwin.amd64 staticli.linux.amd64 staticli.linux.arm -- --github-access-token ${GITHUB_API_KEY} --github-repository staticli/staticli
 
 # Really simple "does it at least run?" tests for now
