@@ -5,7 +5,8 @@ import "github.com/docker/go-connections/nat"
 import "os/user"
 import log "github.com/Sirupsen/logrus"
 import (
-	_ "github.com/pkg/errors")
+	_ "github.com/pkg/errors"
+)
 
 func init() {
 

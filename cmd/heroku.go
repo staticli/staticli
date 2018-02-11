@@ -5,7 +5,8 @@ import "os/user"
 import log "github.com/Sirupsen/logrus"
 import "path"
 import (
-	_ "github.com/pkg/errors")
+	_ "github.com/pkg/errors"
+)
 
 func init() {
 

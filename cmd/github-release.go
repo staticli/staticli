@@ -5,7 +5,8 @@ import "os/user"
 import "os"
 import log "github.com/Sirupsen/logrus"
 import (
-_ "github.com/pkg/errors")
+	_ "github.com/pkg/errors"
+)
 
 func init() {
 
@@ -27,7 +28,7 @@ you can also export GITHUB_RELEASE_ACCESS_TOKEN
 	}
 	task.AddEnv("HOST_USER_ID", u.Uid)
 	task.AddEnv("HOST_GROUP_ID", u.Gid)
-	if os.Getenv("GITHUB_RELEASE_ACCESS_TOKEN")!=""{
+	if os.Getenv("GITHUB_RELEASE_ACCESS_TOKEN") != "" {
 		task.AddEnv("GITHUB_RELEASE_ACCESS_TOKEN", os.Getenv("GITHUB_RELEASE_ACCESS_TOKEN"))
 	}
 	task.SetInitFunc(func(t *cali.Task, args []string) {

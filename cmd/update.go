@@ -1,13 +1,13 @@
 package cmd
 
 import (
+	"fmt"
 	log "github.com/Sirupsen/logrus"
+	"github.com/inconshreveable/go-update"
 	"github.com/skybet/cali"
 	"github.com/staticli/staticli/lib"
-	"runtime"
 	"net/http"
-	"github.com/inconshreveable/go-update"
-	"fmt"
+	"runtime"
 )
 
 func doUpdate(url string) error {
