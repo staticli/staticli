@@ -48,6 +48,8 @@ For any command which exposes a port (typically an http server to render a site)
 
 `staticli github-release` for releasing something to github (see the Makefile for how this is used, it's probably not that helpful except for releasing new versions of staticli)
 
+You can also see what version of staticli you are running with `staticli version` which will also tell you about any available updates if you are online.  If there are available updates you can get the latest version with `staticli update`.
+
 See this [asciicast](https://asciinema.org/a/159884) to see proselint being used for the first time.
 
 [![Download](http://github-release-version.herokuapp.com/github/staticli/staticli/release.svg?style=flat)](https://github.com/staticli/staticli/releases/latest)
