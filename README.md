@@ -13,6 +13,7 @@ Staticli provides the tools that its developers regularly use to work with stati
 * gulp for compiling scss to css
 * heroku for deploying sites to heroku
 * hugo for providing the hugo static site generator
+* npm and npx for managing and running node packages
 * proselint for checking files for best practises in writing
 * python simplehttp for serving the current directory over http
 * surge for deploying sites to surge.sh
@@ -41,6 +42,8 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli heroku` runs the Heroku cli, and takes any parameters and subcommands you need (uses ~/.netrc for authentication)
 
 `staticli hugo` runs the hugo static site generator
+
+`staticli npm` runs npm, the node package manager, and `staticli npx` runs npx from it
 
 `staticli simplehttp` runs Python SimpleHTTP in the current directory.
 
