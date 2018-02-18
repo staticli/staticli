@@ -1,5 +1,7 @@
 # Staticli
 
+[![Download](http://img.shields.io/github/release/staticli/staticli.svg?label=download)](https://github.com/staticli/staticli/releases/latest)
+
 A CLI tool for working with static site generators.  A [Cali](https://github.com/skybet/cali) App
 
 This application provides a number of tools related to static site generation, all running in docker containers from a single binary file.  Rather than go through the hassle of installing Ruby, rake, bundler, jekyll, python, proselint, gulp, etc. you only need the one single binary file and to have docker installed.
