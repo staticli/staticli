@@ -1,7 +1,0 @@
-sudo: required
-language: cpp
-services:
-- docker
-script:
-- make
-- make test
