@@ -15,6 +15,7 @@ Staticli provides the tools that its developers regularly use to work with stati
 * gulp for compiling scss to css
 * heroku for deploying sites to heroku
 * hugo for providing the hugo static site generator
+* jekyll for creating new jekyll sites
 * npm and npx for managing and running node packages
 * proselint for checking files for best practises in writing
 * python simplehttp for serving the current directory over http
