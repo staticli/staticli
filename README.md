@@ -34,11 +34,11 @@ From this one single binary you can now run rake tasks to preview and validate J
 
 For any command which exposes a port (typically an http server to render a site) we default to exposing this on port 2000.  You can override this by setting `--port 4000` or `-p 4000` to listen on (for example) port 4000 instead.
 
+`staticli ag` runs Silver Searcher in the current directory.
+
 `staticli rake` runs `bundle install --path=_vendor && bundle exec rake $@` in the current directory.  This assumes the default rake task runs preview on a Jekyll site, and therefore exposes port 4000 on the container as port 2000 on the host.  This means you can browse to http://127.0.0.1:2000 to view the site.  You can change the port exposed on the host by setting `--port 4000` to use (for example) port 4000.
 
 `staticli bundle` runs `bundle` in the current directory.  Since the `rake` command installs required gems anyway, this command is mostly useful as a way of upgrading gems.
-
-`staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
 `staticli gulp` runs the gulp watch task.  You can add `-t foo` to run the foo task instead.
 
@@ -47,6 +47,8 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli hugo` runs the hugo static site generator
 
 `staticli npm` runs npm, the node package manager, and `staticli npx` runs npx from it
+
+`staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
 `staticli simplehttp` runs Python SimpleHTTP in the current directory.
 
