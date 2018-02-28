@@ -19,7 +19,10 @@ Any addtional flags sent to the rake command come after the --, e.g.
   # staticli bundle install -- --path=_vendor
 `)
 
-	task := command.Task("staticli/rake")
+	image := "staticli/rake"
+	task := command.Task(image)
+	command.Flags().StringP("tag", "t", "latest", "Tag (Ruby version) to use (ruby2.4, ruby2.5)")
+	command.BindFlags()
 	task.Conf.Entrypoint = []string{"bundle"}
 	u, err := user.Current()
 	if err != nil {
@@ -28,5 +31,7 @@ Any addtional flags sent to the rake command come after the --, e.g.
 	task.AddEnv("HOST_USER_ID", u.Uid)
 	task.AddEnv("HOST_GROUP_ID", u.Gid)
 	task.SetInitFunc(func(t *cali.Task, args []string) {
+		t.SetImage(image + ":" + cli.FlagValues().GetString("tag"))
+		log.Infof("Using Ruby %s", cli.FlagValues().GetString("tag"))
 	})
 }
