@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2018-03-04
+### Changed
+- Correct environment variable is set for Jekyll UID & GID
+- Jekyll now uses cache directory on host (needs internet access for first run)
+
 ## [1.5.1] - 2018-02-28
 ### Changed
 - Added option to run specific tagged version of Rake-based commands, allowing you to use `--tag ruby2.4`

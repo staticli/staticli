@@ -6,7 +6,23 @@ import "os/user"
 import log "github.com/Sirupsen/logrus"
 import (
 	_ "github.com/pkg/errors"
+	"os"
+	"path"
+	"io"
 )
+
+func IsEmpty(name string) (bool) {
+	f, err := os.Open(name)
+	if err != nil {
+		return false
+	}
+	defer f.Close()
+	_, err = f.Readdirnames(1)
+	if err == io.EOF {
+		return true
+	}
+	return false
+}
 
 func init() {
 
@@ -15,7 +31,7 @@ func init() {
 	command.SetLong(`Starts a container and runs jekyll.
 Examples:
   # staticli jekyll new my-awesome-site
-Any addtional flags sent to the npm command come after the --, e.g.
+Any additional flags sent to the jekyll command come after the --, e.g.
   # staticli jekyll <command> -- --key value
 `)
 
@@ -25,10 +41,28 @@ Any addtional flags sent to the npm command come after the --, e.g.
 	if err != nil {
 		log.Fatalf("Failed to find uid for user: %s", err)
 	}
-	task.AddEnv("HOST_USER_ID", u.Uid)
-	task.AddEnv("HOST_GROUP_ID", u.Gid)
+
+	task.AddEnv("JEKYLL_UID", u.Uid)
+	task.AddEnv("JEKYLL_GID", u.Gid)
+
+	cacheDir := path.Join(u.HomeDir, ".cache", "staticli", "jekyll", "bundle")
+	os.Mkdir(cacheDir, 0700)
+
+
+	cacheBind, err := task.Bind(cacheDir, "/usr/local/bundle")
+	if err != nil {
+		log.Fatalf("Unable to bind ~/.cache/staticli/ruby: %s", err)
+	}
+	task.AddBind(cacheBind)
+
 	task.SetInitFunc(func(t *cali.Task, args []string) {
+		os.Mkdir(cacheDir, 0700)
+		if IsEmpty(cacheDir) {
+			log.Warnf("You'll need to be online to run this because your cache directory(%s) is empty", cacheDir)
+		}
+		log.Debugf("Using %s for bundle cache directory", cacheDir)
 		log.Infof("Serving http on port %s - http://127.0.0.1:%s", cli.FlagValues().GetString("port"), cli.FlagValues().GetString("port"))
+
 		task.HostConf.PortBindings = nat.PortMap{
 			nat.Port("4000/tcp"): []nat.PortBinding{
 				{HostIP: "0.0.0.0", HostPort: cli.FlagValues().GetString("port")},
