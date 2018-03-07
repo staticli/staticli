@@ -17,6 +17,7 @@ Staticli provides the tools that its developers regularly use to work with stati
 * hugo for providing the hugo static site generator
 * jekyll for creating new jekyll sites
 * npm and npx for managing and running node packages
+* ponysay for nice notifications
 * proselint for checking files for best practises in writing
 * python simplehttp for serving the current directory over http
 * surge for deploying sites to surge.sh
@@ -47,6 +48,8 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli hugo` runs the hugo static site generator
 
 `staticli npm` runs npm, the node package manager, and `staticli npx` runs npx from it
+
+`staticli ponysay` runs ponysay, a cowsay replacement for ponies.  Whilst this isn't strictly speaking a static site generator, it can be useful for notifying that we've finished generating a static site
 
 `staticli proselint README.md` runs proselint against the file README.md to check for best practises in writing.
 
