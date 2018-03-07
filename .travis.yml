@@ -1,0 +1,7 @@
+language: C
+sudo: required
+
+services:
+  - docker
+script:
+  - make -j2 && make test && make install
