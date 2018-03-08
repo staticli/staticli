@@ -3,5 +3,10 @@ sudo: required
 
 services:
   - docker
+stages:
+  - name: after_success
+    if: branch = master
 script:
   - make -j2 && make test-binary
+after_success:
+  - make release
