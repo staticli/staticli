@@ -6,7 +6,6 @@ BUILD_TIME=`date +%FT%T%z`
 
 DEFAULT_SYSTEM_BINARY := $(BINARY).darwin.amd64
 BINTRAY_API_KEY=$(shell cat api_key)
-GITHUB_API_KEY=$(shell cat github_api)
 VERSION=$(shell cat VERSION)
 BUILD_TIME=$(shell date +%FT%T%z)
 BUILD_COMMIT=$(shell git rev-parse HEAD)
@@ -21,6 +20,7 @@ endif
 
 ifndef TRAVIS
 	DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/../../../:/go/src/ -w /go/src/github.com/staticli/staticli
+	GITHUB_API_KEY=$(shell cat github_api)
 endif
 ifdef TRAVIS
 	DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/:/go/src/github.com/staticli/staticli -w /go/src/github.com/staticli/staticli
