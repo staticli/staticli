@@ -4,4 +4,4 @@ sudo: required
 services:
   - docker
 script:
-  - make -j2 && make test && make install
+  - make -j2 && make test-binary
