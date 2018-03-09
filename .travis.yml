@@ -8,5 +8,8 @@ stages:
     if: branch = master
 script:
   - make -j2 && make test-binary
-after_success:
-  - make release
+deploy:
+  provider: script
+  script: make release
+  on:
+    branch: master
