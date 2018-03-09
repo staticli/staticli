@@ -16,6 +16,7 @@ Staticli provides the tools that its developers regularly use to work with stati
 * heroku for deploying sites to heroku
 * hugo for providing the hugo static site generator
 * jekyll for creating new jekyll sites
+* mkdocs, a fast and simple static site generator that's geared towards building project documentation
 * npm and npx for managing and running node packages
 * ponysay for nice notifications
 * proselint for checking files for best practises in writing
@@ -46,6 +47,8 @@ For any command which exposes a port (typically an http server to render a site)
 `staticli heroku` runs the Heroku cli, and takes any parameters and subcommands you need (uses ~/.netrc for authentication)
 
 `staticli hugo` runs the hugo static site generator
+
+`staticli mkdocs new .` creates a new static website for project documentation, `staticli mkdocs serve` will serve it (though note you'll need to set dev_addr)
 
 `staticli npm` runs npm, the node package manager, and `staticli npx` runs npx from it
 
