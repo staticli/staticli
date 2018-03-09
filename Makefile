@@ -34,15 +34,15 @@ $(BINARY): $(BINARY).darwin.amd64 $(BINARY).linux.amd64 $(BINARY).linux.arm
 	cp $(DEFAULT_SYSTEM_BINARY) $@
 
 $(BINARY).darwin.amd64: $(SOURCES)
-	${DOCKER_RUN_COMMAND} -e GOOS=darwin -e GOARCH=amd64 staticli/godep /bin/bash -c "dep ensure && go build ${LDFLAGS} -o $@"
+	${DOCKER_RUN_COMMAND} -e GOOS=darwin -e GOARCH=amd64 staticli/godep /bin/bash -c "dep ensure ; go build ${LDFLAGS} -o $@"
 	${DEFAULT_SHASUM_UTIL} $@ > $@.sha
 
 $(BINARY).linux.amd64: $(SOURCES)
-	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=amd64 staticli/godep /bin/bash -c "dep ensure && go build ${LDFLAGS} -o $@"
+	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=amd64 staticli/godep /bin/bash -c "dep ensure ; go build ${LDFLAGS} -o $@"
 	${DEFAULT_SHASUM_UTIL} $@ > $@.sha
 
 $(BINARY).linux.arm: $(SOURCES)
-	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=arm staticli/godep /bin/bash -c "dep ensure && go build ${LDFLAGS} -o $@"
+	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=arm staticli/godep /bin/bash -c "dep ensure ; go build ${LDFLAGS} -o $@"
 	${DEFAULT_SHASUM_UTIL} $@ > $@.sha
 
 
