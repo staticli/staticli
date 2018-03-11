@@ -15,7 +15,7 @@ The GitHub API also provides download counts for releases, which is not currentl
 There is currently no alerting for these services
  
 ## Contact Info
-Most contacts should go via GitHub issues, but Alice can also be contacted via Twitter (@WheresAlice).  Any escalations will go via Alice.
+Most contacts should go via GitHub issues, but Alice can also be contacted via Twitter (@PrincenAlice).  Any escalations will go via Alice.
 
 ## Latest Deployments
 All releases are tagged [GitHub Releases](https://github.com/staticli/staticli/releases).  There has been a history of releases not being correctly tagged, and so you can get detailed version information by running `staticli version -d` and compare the commit hash to the git history.
