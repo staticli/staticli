@@ -10,6 +10,7 @@ script:
   - make -j2 && make test-binary
 deploy:
   provider: script
+  skip_cleanup: true
   script: make release
   on:
     branch: master
