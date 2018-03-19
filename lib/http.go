@@ -6,13 +6,9 @@ import (
 	"time"
 )
 
-type Release struct {
-	Name string
-}
-
-var myClient = &http.Client{Timeout: 10 * time.Second}
-
+// GetJson does a HTTP request to a specified URL, then applies data to your interface
 func GetJson(url string, target interface{}) error {
+	var myClient = &http.Client{Timeout: 10 * time.Second}
 	r, err := myClient.Get(url)
 	if err != nil {
 		return err
