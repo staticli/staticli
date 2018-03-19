@@ -4,6 +4,7 @@ SOURCES := $(shell find $(SOURCEDIR) -name '*.go')
 BINARY=staticli
 BUILD_TIME=`date +%FT%T%z`
 
+DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/:/go/src/github.com/staticli/staticli -w /go/src/github.com/staticli/staticli
 DEFAULT_SYSTEM_BINARY := $(BINARY).darwin.amd64
 BINTRAY_API_KEY=$(shell cat api_key)
 VERSION=$(shell cat VERSION)
@@ -19,11 +20,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 
 ifndef TRAVIS
-	DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/../../../:/go/src/ -w /go/src/github.com/staticli/staticli
 	GITHUB_API_KEY=$(shell cat github_api)
-endif
-ifdef TRAVIS
-	DOCKER_RUN_COMMAND=docker run --rm -v $(shell pwd)/:/go/src/github.com/staticli/staticli -w /go/src/github.com/staticli/staticli
 endif
 
 # Setup the -ldflags option for go build here, interpolate the variable values
@@ -34,17 +31,20 @@ $(BINARY): $(BINARY).darwin.amd64 $(BINARY).linux.amd64 $(BINARY).linux.arm
 	cp $(DEFAULT_SYSTEM_BINARY) $@
 
 $(BINARY).darwin.amd64: $(SOURCES)
-	${DOCKER_RUN_COMMAND} -e GOOS=darwin -e GOARCH=amd64 staticli/godep /bin/bash -c "dep ensure ; go build ${LDFLAGS} -o $@"
+	${DOCKER_RUN_COMMAND} -e GOOS=darwin -e GOARCH=amd64 staticli/godep /bin/bash -c "go build ${LDFLAGS} -o $@"
 	${DEFAULT_SHASUM_UTIL} $@ > $@.sha
 
 $(BINARY).linux.amd64: $(SOURCES)
-	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=amd64 staticli/godep /bin/bash -c "dep ensure ; go build ${LDFLAGS} -o $@"
+	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=amd64 staticli/godep /bin/bash -c "go build ${LDFLAGS} -o $@"
 	${DEFAULT_SHASUM_UTIL} $@ > $@.sha
 
 $(BINARY).linux.arm: $(SOURCES)
-	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=arm staticli/godep /bin/bash -c "dep ensure ; go build ${LDFLAGS} -o $@"
+	${DOCKER_RUN_COMMAND} -e GOOS=linux -e GOARCH=arm staticli/godep /bin/bash -c "go build ${LDFLAGS} -o $@"
 	${DEFAULT_SHASUM_UTIL} $@ > $@.sha
 
+.PHONY: dep
+dep:
+	${DOCKER_RUN_COMMAND} staticli/godep /bin/bash -c "dep ensure"
 
 .PHONY: clean
 clean:
