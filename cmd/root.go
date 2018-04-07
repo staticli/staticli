@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/skybet/cali"
+	"github.com/wheresalice/cali"
 )
 
 var (

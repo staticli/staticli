@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/skybet/cali"
+	"github.com/wheresalice/cali"
 	"github.com/docker/go-connections/nat"
 	log "github.com/Sirupsen/logrus"
 	_ "github.com/pkg/errors"

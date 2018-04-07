@@ -42,8 +42,8 @@
   version = "0.8.0"
 
 [[constraint]]
-  name = "github.com/skybet/cali"
-  version = "0.1.1"
+  name = "github.com/wheresalice/cali"
+  branch = "master"
 
 [prune]
   go-tests = true

@@ -1,6 +1,6 @@
 package cmd
 
-import "github.com/skybet/cali"
+import "github.com/wheresalice/cali"
 import "os/user"
 import log "github.com/Sirupsen/logrus"
 import (

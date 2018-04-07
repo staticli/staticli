@@ -2,7 +2,7 @@ package cmd
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/skybet/cali"
+	"github.com/wheresalice/cali"
 
 	"github.com/staticli/staticli/lib"
 )
