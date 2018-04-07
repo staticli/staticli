@@ -142,12 +142,6 @@
   version = "v0.8.0"
 
 [[projects]]
-  name = "github.com/skybet/cali"
-  packages = ["."]
-  revision = "bd397411abf5a12679ffec06a7f00af5f64d706a"
-  version = "v0.1.1"
-
-[[projects]]
   name = "github.com/spf13/afero"
   packages = [
     ".",
@@ -185,6 +179,12 @@
   packages = ["."]
   revision = "25b30aa063fc18e48662b86996252eabdcf2f0c7"
   version = "v1.0.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/wheresalice/cali"
+  packages = ["."]
+  revision = "a9813bab7457e0832f2e561524da8925aadadcfa"
 
 [[projects]]
   branch = "master"
@@ -278,6 +278,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1f344d0a9922230981abde13506a891e6b28287e2512cfab58607114628134ca"
+  inputs-digest = "3b3063f34f8ee1385b651932b0f8232fdc9eaef519587e44197c07046388f2e2"
   solver-name = "gps-cdcl"
   solver-version = 1

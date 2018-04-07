@@ -1,6 +1,6 @@
 package cmd
 
-import "github.com/skybet/cali"
+import "github.com/wheresalice/cali"
 
 func init() {
 
