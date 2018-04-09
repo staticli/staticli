@@ -22,7 +22,7 @@ func init() {
 
 		if !isLatestVersion {
 			log.Infof("You're not running the latest version 😱")
-			log.Infof("Update to v%s with: lucli update", releaseData.Name)
+			log.Infof("Update to v%s with: staticli update", releaseData.Name)
 		}
 	}
 

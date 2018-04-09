@@ -2,15 +2,15 @@ package cmd
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/wheresalice/cali"
 	"github.com/staticli/staticli/lib"
+	"github.com/wheresalice/cali"
 )
 
 func init() {
 
 	command := cli.NewCommand("update")
-	command.SetShort("Update the current running version of lucli")
-	command.Flags().BoolP("images","i",false, "Should we also update local images?")
+	command.SetShort("Update the current running version of staticli")
+	command.Flags().BoolP("images", "i", false, "Should we also update local images?")
 	command.BindFlags()
 
 	var taskFunc cali.TaskFunc = func(t *cali.Task, args []string) {
