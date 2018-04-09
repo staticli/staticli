@@ -1,14 +1,12 @@
 package cali
 
 import (
-	"fmt"
-	"os"
-
+	log "github.com/Sirupsen/logrus"
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
 )
 
-// command is the actual command run by the cli and essentially just wraps cobra.Command and
+// Command is the actual command run by the cli and essentially just wraps cobra.Command and
 // has an associated Task
 type Command struct {
 	name    string
@@ -50,8 +48,7 @@ func (c *Command) Task(def interface{}) *Task {
 		// Slightly unidiomatic to blow up here rather than return an error
 		// choosing to so as to keep the API uncluttered and also if you get here it's
 		// an implementation error rather than a runtime error.
-		fmt.Println("Unknown Task type. Must either be an image (string) or a TaskFunc")
-		os.Exit(EXIT_CODE_API_ERROR)
+		log.Fatalf("Unknown Task type. Must either be an image (string) or a TaskFunc")
 	}
 	c.RunTask = t
 	return t

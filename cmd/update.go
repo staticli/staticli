@@ -17,11 +17,11 @@ func init() {
 
 		if cli.FlagValues().GetBool("images") {
 			docker := cali.NewDockerClient()
-			docker.InitDocker()
 
 			images := []string{"ketouem/ag-alpine", "staticli/rake", "buildkite/github-release", "agomezmoron/docker-gulp", "wingrunr21/alpine-heroku-cli", "jojomi/hugo", "jekyll/jekyll", "moird/mkdocs", "node:alpine", "mpepping/ponysay", "staticli/proselint", "staticli/simplehttp", "registry.opensource.zalan.do/pathfinder/skipper:latest", "staticli/surge"}
 			for _, image := range images {
-				if docker.ImageExists(image) {
+				imageExists, _ := docker.ImageExists(image)
+				if imageExists {
 					log.Debugf("checking for updates to %s", image)
 					docker.PullImage(image)
 				} else {
