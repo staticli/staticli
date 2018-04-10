@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.8.1] - 2018-04-09
 ### Changed
 - Rebuilt against a new version of Cali, no functional changes
+### Added
+- `version --check-update=false` because Travis is failing to connect to the GitHub releases API
 
 ## [1.8.0] - 2018-04-07
 ### Added
