@@ -2,7 +2,6 @@ package cali
 
 import (
 	"fmt"
-	"os"
 	"runtime"
 
 	log "github.com/Sirupsen/logrus"
@@ -11,9 +10,6 @@ import (
 )
 
 const (
-	EXIT_CODE_RUNTIME_ERROR = 1
-	EXIT_CODE_API_ERROR     = 2
-
 	workdir = "/tmp/workspace"
 )
 
@@ -152,7 +148,6 @@ func (c *Cli) Start() {
 	cobra.OnInitialize(c.initConfig)
 
 	if err := c.cobra.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(EXIT_CODE_RUNTIME_ERROR)
+		log.Fatalf("%s", err)
 	}
 }

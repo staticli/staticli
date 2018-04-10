@@ -72,9 +72,9 @@ test-unit:
 
 .PHONY: test-integration
 test-integration:
-	go run main.go -d version
+	go run main.go -d version --check-update=false
 	echo "More coming at some point"
 
 .PHONY: test-binary
 test-binary:
-	./$(DEFAULT_SYSTEM_BINARY) version
+	./$(DEFAULT_SYSTEM_BINARY) version --check-update=false

@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"path"
+	"syscall"
 
 	log "github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types"
@@ -21,7 +22,7 @@ import (
 
 // Event holds the json structure for Docker API events
 type Event struct {
-	Id     string `json:"id"`
+	ID     string `json:"id"`
 	Status string `json:"status"`
 }
 
@@ -33,7 +34,7 @@ type ProgressDetail struct {
 
 // CreateResponse is the response from Docker API when pulling an image
 type CreateResponse struct {
-	Id             string         `json:"id"`
+	ID             string         `json:"id"`
 	Status         string         `json:"status"`
 	ProgressDetail ProgressDetail `json:"progressDetail"`
 	Progress       string         `json:"progress,omitempty"`
@@ -45,11 +46,15 @@ type DockerClient struct {
 	HostConf *container.HostConfig
 	NetConf  *network.NetworkingConfig
 	Conf     *container.Config
-	running  []string
 }
 
-// Init initialises the client
+// InitDocker initialises the client
 func (c *DockerClient) InitDocker() error {
+	// Do nothing if already initialised Docker
+	if c.Cli != nil {
+		return nil
+	}
+
 	var cli *client.Client
 
 	defaultHeaders := map[string]string{"User-Agent": "engine-api-cli-1.0"}
@@ -104,7 +109,7 @@ func (c *DockerClient) AddBind(bnd string) {
 	c.HostConf.Binds = append(c.HostConf.Binds, bnd)
 }
 
-// AddEnvs adds an environment variable to the HostConfig
+// AddEnv adds an environment variable to the HostConfig
 func (c *DockerClient) AddEnv(key, value string) {
 	c.Conf.Env = append(c.Conf.Env, fmt.Sprintf("%s=%s", key, value))
 }
@@ -182,15 +187,34 @@ func (c *DockerClient) BindFromGit(cfg *GitCheckoutConfig, noGit func() error) e
 	return nil
 }
 
+// deleteContainerOnSignal waits for a signal then deletes a container
+func (c *DockerClient) deleteContainerOnSignal(id string, sigs chan os.Signal) {
+	sig := <-sigs
+	log.Debugf("Trapped signal: %s", sig)
+
+	if err := c.DeleteContainer(id); err != nil {
+		log.Fatalf("Failed to remove container: %s", err)
+	}
+}
+
 // StartContainer will create and start a container with logs and optional cleanup
 func (c *DockerClient) StartContainer(rm bool, name string) (string, error) {
+	if err := c.InitDocker(); err != nil {
+		return "", err
+	}
+
 	log.WithFields(log.Fields{
 		"image": c.Conf.Image,
 		"envs":  fmt.Sprintf("%v", c.Conf.Env),
 		"cmd":   fmt.Sprintf("%v", c.Conf.Cmd),
 	}).Debug("Creating new container")
 
-	if !c.ImageExists(c.Conf.Image){
+	exists, err := c.ImageExists(c.Conf.Image)
+	if err != nil {
+		return "", fmt.Errorf("Failed to create container: %s", err)
+	}
+
+	if !exists {
 		if err := c.PullImage(c.Conf.Image); err != nil {
 			return "", fmt.Errorf("Failed to fetch image: %s", err)
 		}
@@ -201,20 +225,11 @@ func (c *DockerClient) StartContainer(rm bool, name string) (string, error) {
 		return "", fmt.Errorf("Failed to create container: %s", err)
 	}
 
-	// Clean up on ctrl+c
+	// Clean up on ctrl+c or kill
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, os.Interrupt)
-	signal.Notify(ch, os.Kill)
+	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+	go c.deleteContainerOnSignal(resp.ID, ch)
 
-	go func() {
-		<-ch
-		log.Debug("Trapped ctrl+c")
-
-		if err = c.DeleteContainer(resp.ID); err != nil {
-			log.Errorf("Failed to remove container: %s", err)
-		}
-		os.Exit(1)
-	}()
 	log.WithFields(log.Fields{
 		"image": c.Conf.Image,
 		"id":    resp.ID[0:12],
@@ -240,11 +255,11 @@ func (c *DockerClient) StartContainer(rm bool, name string) (string, error) {
 			Stderr: true,
 		}
 		hijack, err := c.Cli.ContainerAttach(context.Background(), resp.ID, ca)
-		defer hijack.Conn.Close()
-
 		if err != nil {
 			return resp.ID, fmt.Errorf("Failed to start container: %s", err)
 		}
+		defer hijack.Conn.Close()
+
 		oldState, err := terminal.MakeRaw(fd)
 		defer terminal.Restore(fd, oldState)
 
@@ -304,7 +319,6 @@ func (c *DockerClient) StartContainer(rm bool, name string) (string, error) {
 	}
 
 	if rm {
-
 		if err = c.DeleteContainer(resp.ID); err != nil {
 			return resp.ID, fmt.Errorf("Failed to remove container: %s", err)
 		}
@@ -317,18 +331,26 @@ func (c *DockerClient) StartContainer(rm bool, name string) (string, error) {
 }
 
 // ContainerExists determines if the container with this name exist
-func (c *DockerClient) ContainerExists(name string) bool {
+func (c *DockerClient) ContainerExists(name string) (bool, error) {
+	if err := c.InitDocker(); err != nil {
+		return false, err
+	}
+
 	_, err := c.Cli.ContainerInspect(context.Background(), name)
 
-	// Fairly safe assumption
+	// Fairly safe assumption: no errors == container exists
 	if err != nil {
-		return false
+		return false, nil
 	}
-	return true
+	return true, nil
 }
 
 // DeleteContainer - Delete a container
 func (c *DockerClient) DeleteContainer(id string) error {
+	if err := c.InitDocker(); err != nil {
+		return err
+	}
+
 	log.WithFields(log.Fields{
 		"id": id[0:12],
 	}).Debug("Removing container")
@@ -340,7 +362,11 @@ func (c *DockerClient) DeleteContainer(id string) error {
 }
 
 // ImageExists determines if an image exist locally
-func (c *DockerClient) ImageExists(image string) bool {
+func (c *DockerClient) ImageExists(image string) (bool, error) {
+	if err := c.InitDocker(); err != nil {
+		return false, err
+	}
+
 	log.WithFields(log.Fields{
 		"image": image,
 	}).Debug("Checking if image exists locally")
@@ -352,13 +378,16 @@ func (c *DockerClient) ImageExists(image string) bool {
 		log.WithFields(log.Fields{
 			"image": image,
 		}).Debugf("Error inspecting image: %s", err)
-		return false
+		return false, nil
 	}
-	return true
+	return true, nil
 }
 
 // PullImage - Pull an image locally
 func (c *DockerClient) PullImage(image string) error {
+	if err := c.InitDocker(); err != nil {
+		return err
+	}
 
 	log.WithFields(log.Fields{
 		"image": image,
