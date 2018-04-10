@@ -184,7 +184,7 @@
   branch = "master"
   name = "github.com/wheresalice/cali"
   packages = ["."]
-  revision = "a9813bab7457e0832f2e561524da8925aadadcfa"
+  revision = "99991a9e4a5f943ece904e2dc34681ef812ee79f"
 
 [[projects]]
   branch = "master"

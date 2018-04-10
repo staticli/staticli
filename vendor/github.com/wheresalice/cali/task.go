@@ -18,9 +18,6 @@ var defaultTaskFunc TaskFunc = func(t *Task, args []string) {
 	if err := t.SetDefaults(args); err != nil {
 		log.Fatalf("Error setting container defaults: %s", err)
 	}
-	if err := t.InitDocker(); err != nil {
-		log.Fatalf("Error initialising Docker: %s", err)
-	}
 	if _, err := t.StartContainer(true, t.Name); err != nil {
 		log.Fatalf("Error executing task: %s", err)
 	}
@@ -85,7 +82,7 @@ func (t *Task) Bind(src, dst string) (string, error) {
 		usr, err := user.Current()
 
 		if err != nil {
-			return expanded, fmt.Errorf("Error expanding bind path: %s")
+			return expanded, fmt.Errorf("Error expanding bind path: %s", err)
 		}
 		expanded = filepath.Join(usr.HomeDir, src[2:])
 	} else {
@@ -94,7 +91,7 @@ func (t *Task) Bind(src, dst string) (string, error) {
 	expanded, err := filepath.Abs(expanded)
 
 	if err != nil {
-		return expanded, fmt.Errorf("Error expanding bind path: %s")
+		return expanded, fmt.Errorf("Error expanding bind path: %s", err)
 	}
 	return fmt.Sprintf("%s:%s", expanded, dst), nil
 }
