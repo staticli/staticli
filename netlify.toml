@@ -5,3 +5,10 @@
 [[redirects]]
   from = "/staticli"
   to = "/"
+[[headers]]
+for = /*
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "origin"
+Content-Security-Policy-Report-Only = "default-src 'none'; style-src 'self' *.cloudfront.net ; img-src 'self' https://img.shields.io *.cloudfront.net ; font-src 'self' *.cloudfront.net ; script-src https://oss.maxcdn.com 'self' 'unsafe-inline' *.cloudfront.net; connect-src 'self' ; report-uri https://leedstrains.report-uri.com/r/d/csp/reportOnly"
