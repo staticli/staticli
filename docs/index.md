@@ -1,6 +1,6 @@
 # Staticli
 
-[![Download](http://img.shields.io/github/release/staticli/staticli.svg?label=download)](https://github.com/staticli/staticli/releases/latest)
+[![Download](https://img.shields.io/github/release/staticli/staticli.svg?label=download)](https://github.com/staticli/staticli/releases/latest)
 
 A CLI tool for working with static site generators.  A [Cali](https://github.com/skybet/cali) App
 
@@ -66,4 +66,4 @@ You can also see what version of staticli you are running with `staticli version
 
 See this [asciicast](https://asciinema.org/a/159884) to see proselint being used for the first time.
 
-[![Download](http://img.shields.io/github/release/staticli/staticli.svg?label=download)](https://github.com/staticli/staticli/releases/latest)
+[![Download](https://img.shields.io/github/release/staticli/staticli.svg?label=download)](https://github.com/staticli/staticli/releases/latest)
