@@ -1,16 +1,11 @@
-language: C
-sudo: required
+# .travis.yml
+language: go
 
-services:
-  - docker
-stages:
-  - name: after_success
-    if: branch = master
-script:
-  - make -j2 && make test-binary
+# calls goreleaser
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: make release
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script: curl -sL https://git.io/goreleaser | bash
+    on:
+      tags: true
+      condition: $TRAVIS_OS_NAME = linux
