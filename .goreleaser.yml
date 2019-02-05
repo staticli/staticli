@@ -12,6 +12,8 @@ builds:
   ldflags:
   - -s -w -X github.com/staticli/staticli/lib.Version={{.Version}} -X github.com/staticli/staticli/lib.BuildCommit={{.ShortCommit}} -X github.com/staticli/staticli/lib.BuildTime={{.Date}} -X github.com/staticli/staticli/lib.BuildRepo={{.GitURL}}
 archive:
+  format: binary
+  name_template: "{{ .ProjectName }}.{{ .Os }}.{{ .Arch }}"
   replacements:
     darwin: Darwin
     linux: Linux
