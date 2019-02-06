@@ -24,3 +24,13 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+brew:
+  github:
+    owner: staticli
+    name: staticli-tap
+  url_template: https://github.com/staticli/staticli/releases/download/{{ .Tag }}/staticli.darwin.amd64
+  homepage: "https://staticli.tech/"
+  description: "A CLI tool for working with static site generators"
+  test: |
+    system "#{bin}/staticli --version
+  folder: Formula
