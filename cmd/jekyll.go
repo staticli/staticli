@@ -5,13 +5,14 @@ import "github.com/docker/go-connections/nat"
 import "os/user"
 import log "github.com/Sirupsen/logrus"
 import (
-	_ "github.com/pkg/errors"
+	"io"
 	"os"
 	"path"
-	"io"
+
+	_ "github.com/pkg/errors"
 )
 
-func IsEmpty(name string) (bool) {
+func IsEmpty(name string) bool {
 	f, err := os.Open(name)
 	if err != nil {
 		return false
@@ -48,7 +49,6 @@ Any additional flags sent to the jekyll command come after the --, e.g.
 	cacheDir := path.Join(u.HomeDir, ".cache", "staticli", "jekyll", "bundle")
 	os.Mkdir(cacheDir, 0700)
 
-
 	cacheBind, err := task.Bind(cacheDir, "/usr/local/bundle")
 	if err != nil {
 		log.Fatalf("Unable to bind ~/.cache/staticli/ruby: %s", err)
@@ -61,12 +61,18 @@ Any additional flags sent to the jekyll command come after the --, e.g.
 			log.Warnf("You'll need to be online to run this because your cache directory(%s) is empty", cacheDir)
 		}
 		log.Debugf("Using %s for bundle cache directory", cacheDir)
-		log.Infof("Serving http on port %s - http://127.0.0.1:%s", cli.FlagValues().GetString("port"), cli.FlagValues().GetString("port"))
 
-		task.HostConf.PortBindings = nat.PortMap{
-			nat.Port("4000/tcp"): []nat.PortBinding{
-				{HostIP: "0.0.0.0", HostPort: cli.FlagValues().GetString("port")},
-			},
+		if len(args) >= 1 && args[0] == "build" {
+			log.Debugf("Not mapping a port. Unrequired for a build")
+		} else {
+
+			log.Infof("Serving http on port %s - http://127.0.0.1:%s", cli.FlagValues().GetString("port"), cli.FlagValues().GetString("port"))
+
+			task.HostConf.PortBindings = nat.PortMap{
+				nat.Port("4000/tcp"): []nat.PortBinding{
+					{HostIP: "0.0.0.0", HostPort: cli.FlagValues().GetString("port")},
+				},
+			}
 		}
 
 	})
