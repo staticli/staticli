@@ -11,9 +11,17 @@ builds:
   - CGO_ENABLED=0
   ldflags:
   - -s -w -X github.com/staticli/staticli/lib.Version={{.Version}} -X github.com/staticli/staticli/lib.BuildCommit={{.ShortCommit}} -X github.com/staticli/staticli/lib.BuildTime={{.Date}} -X github.com/staticli/staticli/lib.BuildRepo={{.GitURL}}
-archive:
-  format: binary
-  name_template: "{{ .ProjectName }}.{{ .Os }}.{{ .Arch }}"
+#archive:
+#  format: binary
+#  name_template: "{{ .ProjectName }}.{{ .Os }}.{{ .Arch }}"
+archives:
+  - name_template: "{{ .ProjectName }}.{{ .Os }}.{{ .Arch }}"
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -24,13 +32,3 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
-brew:
-  github:
-    owner: staticli
-    name: staticli-tap
-  url_template: https://github.com/staticli/staticli/releases/download/{{ .Tag }}/staticli.darwin.amd64
-  homepage: "https://staticli.tech/"
-  description: "A CLI tool for working with static site generators"
-  test: |
-    system "#{bin}/staticli --version
-  folder: Formula
